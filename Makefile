@@ -57,8 +57,7 @@ endef
 
 .pre-ios: ## Check if all requirements is met for running/building ios version
 ifeq ($(OS), Darwin)
-	@bundle install
-	@cd ios && bundle exec pod install;
+	@cd ios && pod install;
 endif
 	@touch $@
 

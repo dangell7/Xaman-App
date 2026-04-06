@@ -52,7 +52,7 @@ class FlagParser {
             Remark: {
                 tfImmutable: 0x00000001, // Immutable
             },
-        };
+        } as any;
 
         // transaction flags
         if (type in TransactionTypes && Object.prototype.hasOwnProperty.call(transactionFlags, type)) {
@@ -70,9 +70,8 @@ class FlagParser {
         }
 
         // object flag
-        if (Object.values(InnerObjectTypes).includes(type as InnerObjectTypes) && 
-            Object.prototype.hasOwnProperty.call(objectFlags, type)) {
-            this._objectFlags = objectFlags[type as InnerObjectTypes];
+        if (type in InnerObjectTypes && Object.prototype.hasOwnProperty.call(objectFlags, type)) {
+            this._objectFlags = objectFlags[type];
         }
         
     }
@@ -174,7 +173,7 @@ class FlagParser {
      * Sets the flags of the inner object.
      *
      * @param {ParsedFlags} flags - The flags to be set. (Object)
-     * @throws {Error} - Throws an error if the transaction type does not support setting flags.
+     * @throws {Error} - Throws an error if the inner object type does not support setting flags.
      * @returns {number} - The newly set flags value in UInt32.
      */
     setInnerFlags(flags: ParsedFlags): number {
